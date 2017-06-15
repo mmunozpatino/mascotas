@@ -48,21 +48,13 @@ export class HistClinicaService extends RestBaseService{
   }
  
   guardarHistoria(value: HistoriaClinica): Promise<HistoriaClinica> {
-    if (value.id) {
+    
       return this.http.post(HistClinicaService.serverUrl + this.url, JSON.stringify(value), this.getRestHeader())
       .toPromise()
       .then(response => {
         return response.json() as HistoriaClinica;
       })
       .catch(this.handleError);
-    } else {
-      return this.http.post(HistClinicaService.serverUrl + this.url, JSON.stringify(value), this.getRestHeader())
-      .toPromise()
-      .then(response => {
-        return response.json() as HistoriaClinica;
-      })
-      .catch(this.handleError);
-    }
   }
 /*
   eliminarHistoria(id: number): Promise<any> {

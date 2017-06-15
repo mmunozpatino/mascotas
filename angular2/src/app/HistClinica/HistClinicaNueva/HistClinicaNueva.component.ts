@@ -18,6 +18,8 @@ export class HistClinicaNueva implements OnInit{
         this.historia = {id: null, mascota_id: this.mascotaId, fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
+        console.log(this.historia);
+        this.historia.id = 3;
         this.historia.mascota_id = this.mascotaId;
         this.service.guardarHistoria(this.historia);
         this.router.navigate(['historia/'+this.mascotaId]);

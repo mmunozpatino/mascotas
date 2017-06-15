@@ -157,10 +157,11 @@ public class HistoriaController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response agregarHistoria(@Context HttpServletRequest httpRequest, HistoriasDTO historiaDTO) throws NamingException {
+	public Response agregarHistoria(@Context HttpServletRequest httpRequest, Historia historia) throws NamingException {
 		try {
-			int id = historiaService.actualizarHistoria(httpRequest.getUserPrincipal().getName(), historiaDTO);
-			return Response.ok().entity(historiaService.findById(id)).build();
+			//int id = historiaService.actualizarHistoria(httpRequest.getUserPrincipal().getName(), historia);
+			
+			return Response.ok().entity(HistoriasDTO.Factory.get(historia)).build();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(FormError.processError(e)).build();
@@ -169,4 +170,22 @@ public class HistoriaController {
 			return Response.status(500).entity(FormError.processError(e)).build();
 		}
 	}
+	/*
+	 * @Path("/")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response agregarMascota(@Context HttpServletRequest httpRequest, MascotaDTO mascotaDTO) throws NamingException {
+		try {
+			int id = mascotaService.actualizarMascota(httpRequest.getUserPrincipal().getName(), mascotaDTO);
+			return Response.ok().entity(mascotaService.findById(httpRequest.getUserPrincipal().getName(), id)).build();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		}
+	}
+	 */
 }

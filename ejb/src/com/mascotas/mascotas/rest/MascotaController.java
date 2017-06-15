@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import com.mascotas.application.dtos.FormError;
 import com.mascotas.application.exceptions.BusinessException;
+import com.mascotas.historias.dto.HistoriasDTO;
 import com.mascotas.mascotas.MascotaService;
 import com.mascotas.mascotas.dto.MascotaDTO;
 
@@ -33,6 +34,8 @@ import com.mascotas.mascotas.dto.MascotaDTO;
 public class MascotaController {
 	@EJB
 	MascotaService mascotaService;
+	
+	HistoriasDTO historiaDTO;
 
 	/**
 	 * Busca las mactoas del usuario logueado.
@@ -138,6 +141,7 @@ public class MascotaController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response agregarMascota(@Context HttpServletRequest httpRequest, MascotaDTO mascotaDTO) throws NamingException {
 		try {
+			
 			int id = mascotaService.actualizarMascota(httpRequest.getUserPrincipal().getName(), mascotaDTO);
 			return Response.ok().entity(mascotaService.findById(httpRequest.getUserPrincipal().getName(), id)).build();
 		} catch (BusinessException e) {

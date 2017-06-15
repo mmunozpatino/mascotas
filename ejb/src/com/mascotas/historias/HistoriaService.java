@@ -41,8 +41,9 @@ public class HistoriaService {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void guardarHistoria(Historia historia) {
+	public Historia guardarHistoria(Historia historia) {
 		historiaRepository.add(historia);
+		return historia;
 	}
 
 	/**
