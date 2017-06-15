@@ -1,0 +1,22 @@
+<h1>Nueva Historia Clínica</h1>
+<label>Id:</label>
+<br>
+<input [(ngModel)]="historia.id" type="text" >
+<br>
+<label>Titulo:</label>
+<br>
+<input [(ngModel)]="historia.titulo" type="text" >
+<br>
+<label for="">Fecha</label>
+<br>
+<input type="date" [(ngModel)]='historia.fecha'>
+<br>
+<label for="">Decripción</label>
+<br>
+<input type="text" [(ngModel)]='historia.descripcion'>
+<br>
+<label for="">Recordatorio</label>
+<br>
+<input type="text" [(ngModel)]='historia.recordatorio'>
+<br>
+<button (click)='save()'>Submit</button>

@@ -1,0 +1,35 @@
+<h1>HistoriaClinica</h1>
+<div class="container">
+	<table cellspacing='0'>
+		<thead>
+			<tr>
+				<th colspan=3>Historias</th>
+			</tr>
+			<tr>
+				<th>Fecha</th>
+				<th>Descripcion</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- ngFor en el click del renglon se ejecuta un metodo, se le pasa la mascota actual -->
+
+			<tr *ngFor='let h of historias'>				
+				
+				<td>{{h.fecha}}</td>
+				<td>{{h.titulo}}</td>
+				<td class="text">
+					<img src="/assets/edit.png" name="editar"/>
+					<a [routerLink]="['/historiaDetalle/'+h.id]">detalle</a>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+	<button class="btn btn-success" (click)='goNew()'>Nueva</button>
+	<div *ngIf="nueva">
+		<HistClincaNueva [mascotaId]='idMascota'></HistClincaNueva>
+	</div>
+</div>
+<input type="date" [(ngModel)]='fecha'>
+<label for="">{{fecha}}</label>

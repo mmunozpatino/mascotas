@@ -1,0 +1,15 @@
+<div *ngIf=historia class='cuerpo'>
+<h1>{{historia.titulo}}</h1>
+<h3>Fecha:</h3>
+<label for="">{{historia.fecha}}</label>
+<h3>Descripcion:</h3>
+<label for="">{{historia.descripcion}}</label>
+<h3>Recordatorio:</h3>
+<label for="">{{historia.recordatorio}}</label>
+<br>
+
+</div>
+<div class='botones'>
+    
+	<button class="btn btn-default" (click)='goBack()' >Volver</button>	
+</div>
