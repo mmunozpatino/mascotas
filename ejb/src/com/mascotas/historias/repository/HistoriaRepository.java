@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 //import javax.persistence.Query;
@@ -14,8 +12,6 @@ import javax.persistence.TypedQuery;
 
 import com.mascotas.application.repository.Repositorio;
 import com.mascotas.historias.entities.Historia;
-import com.mascotas.mascotas.entities.Mascota;
-import com.mascotas.provincias.dto.ProvinciaDTO;
 
 @Stateless
 @LocalBean

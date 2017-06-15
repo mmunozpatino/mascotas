@@ -159,9 +159,9 @@ public class HistoriaController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response agregarHistoria(@Context HttpServletRequest httpRequest, Historia historia) throws NamingException {
 		try {
-			//int id = historiaService.actualizarHistoria(httpRequest.getUserPrincipal().getName(), historia);
-			
-			return Response.ok().entity(HistoriasDTO.Factory.get(historia)).build();
+			HistoriasDTO hist = HistoriasDTO.Factory.get(historia);
+			int id = historiaService.actualizarHistoria(httpRequest.getUserPrincipal().getName(), hist);
+			return Response.ok().entity(historiaService.findById(id)).build();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(FormError.processError(e)).build();
