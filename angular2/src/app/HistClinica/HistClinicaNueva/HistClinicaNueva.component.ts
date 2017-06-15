@@ -11,15 +11,15 @@ export class HistClinicaNueva implements OnInit{
     @Input() mascotaId: string;
     errorMessage: string;
     formSubmitted: boolean;
-    hist: HistoriaClinica = {id: 9, mascota_id:'2', fecha: '06-06-2017', titulo: 'historia1', descripcion: 'descripcion1', recordatorio: 'recordatorio1'};
+    hist: HistoriaClinica = {id: 9, fecha: '06-06-2017', titulo: 'historia1', descripcion: 'descripcion1', recordatorio: 'recordatorio1'};
   errors: string[] = [];
     constructor(
         private service: HistClinicaService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
     ){}
     ngOnInit(){
-        this.historia = {id: null, mascota_id: this.mascotaId, fecha: '', titulo: '', descripcion: '', recordatorio: ''};
+        this.historia = {id: null, fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
         /*
@@ -32,7 +32,8 @@ export class HistClinicaNueva implements OnInit{
         this.service.guardarHistoria(this.historia);
         console.log('Se guardo!');
         */
-        this.service.guardarHistoria(this.hist).then(historia => this.router.navigate(['historia/'+this.mascotaId])).catch(error => this.procesarValidacionesRest(error));
+        this.service.guardarHistoria(this.hist,parseInt(this.mascotaId)).then(historia => {this.router.navigate(['historia/'+this.mascotaId]);
+          console.log(this.historia)}).catch(error => this.procesarValidacionesRest(error));
 
     }
     cleanRestValidations() {

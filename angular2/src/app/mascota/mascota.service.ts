@@ -36,6 +36,7 @@ export class MascotaService extends RestBaseService {
       })
       .catch(this.handleError);
     } else {
+      console.log(JSON.stringify(value));
       return this.http.post(MascotaService.serverUrl + this.url, JSON.stringify(value), this.getRestHeader())
       .toPromise()
       .then(response => {
