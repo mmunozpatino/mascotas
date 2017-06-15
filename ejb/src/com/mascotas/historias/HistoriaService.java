@@ -68,33 +68,29 @@ public class HistoriaService {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public int actualizarHistoria(String login, HistoriasDTO historia) throws BusinessException {
-		List<ValidationError> errors = historiaValidations.validarActualizarMascota(login, historia);
+		List<ValidationError> errors = historiaValidations.validarActualizarHistoria(login, historia);
 		if (errors.size() > 0) {
 			throw new BusinessException("Error al guardar mascota.", errors);
 		}
 
-		Historia historiaEditada = null;
+		Historia historiaEditada;
 		if (historia.getId() != null) {
 			historiaEditada = historiaRepository.get(historia.getId());
-		}
-
-		if (historiaEditada == null) {
+		}else{
 			//Usuario usuario = usuarioRepository.get(login);
-
 			historiaEditada = new Historia();
-			historiaEditada.setMascota(historia.getMascota());;
-			historiaEditada.setTitulo(historia.getTitulo());
-			historiaRepository.add(historiaEditada);
+			
 		}
-
+		historiaEditada.setMascota(historia.getMascota());;
+		historiaEditada.setTitulo(historia.getTitulo());
 		historiaEditada.setDescripcion(historia.getDescripcion());
         historiaEditada.setRecordatorio(historia.getRecordatorio());
 		try {
 			historiaEditada.setFecha(StringUtils.DATE_FORMAT.parse(historia.getFecha()));
 		} catch (Exception e) {
 		}
-		historiaEditada.setTitulo(historia.getTitulo());
-		
+
+		historiaRepository.add(historiaEditada);
 		return historiaEditada.getId();
 	}
 	

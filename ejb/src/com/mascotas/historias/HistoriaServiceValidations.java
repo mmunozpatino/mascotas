@@ -65,7 +65,7 @@ public class HistoriaServiceValidations {
 	 *            Mascota a actualizar.
 	 * @return
 	 */
-	public List<ValidationError> validarActualizarMascota(String login, HistoriasDTO historia) {
+	public List<ValidationError> validarActualizarHistoria(String login, HistoriasDTO historia) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		if (login == null || login.isEmpty()) {
