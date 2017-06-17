@@ -6,7 +6,8 @@ import { ActivatedRoute, Router }   from '@angular/router';
 
 @Component({
     selector: 'HistClinica',
-    templateUrl: 'HistClinica.component.html'
+    templateUrl: 'HistClinica.component.html',
+    styleUrls:['HistClinica.component.css']
 })
 export class HistClinica implements OnInit{
     fecha: string;

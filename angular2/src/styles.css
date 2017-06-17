@@ -73,8 +73,13 @@ table {
 	-moz-box-shadow: 0 1px 2px #d1d1d1;
 	-webkit-box-shadow: 0 1px 2px #d1d1d1;
 	box-shadow: 0 1px 2px #d1d1d1;
+	
 }
 
+.container{
+	height: 80%;
+	overflow: scroll;
+}
 table th {
 	padding: 21px 25px 22px 25px;
 	border-top: 1px solid #fafafa;

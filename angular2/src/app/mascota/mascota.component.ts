@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Rx';
 
 @Component( {
     selector: 'app-mascota',
-    templateUrl: './mascota.component.html'
+    templateUrl: './mascota.component.html',
+    styleUrls: ['mascota.component.css']
 })
 export class MascotaComponent implements OnInit {
     errorMessage: string;

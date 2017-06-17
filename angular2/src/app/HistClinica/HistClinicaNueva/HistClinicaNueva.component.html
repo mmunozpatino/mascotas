@@ -1,21 +1,17 @@
+<div class='cuerpo'>
 <h1>Nueva Historia Clínica</h1>
-<br>
-<label>Titulo:</label>
-<br>
+<h3>Titulo:</h3>
 <input [(ngModel)]="historia.titulo" type="text" >
-<br>
-<label for="">Fecha</label>
-<br>
+<h3 for="">Fecha</h3>
 <ng2-datepicker class="form-control"  name="fechaNacimiento" [options]="{ format: 'DD/MM/YYYY'}"
 			[ngModel]="historia.fecha | datePicker" [class.errorBorder]="!historia.fecha || errors['fecha']"
 			(ngModelChange)="historia.fecha=$event.formatted" ></ng2-datepicker>
-<br>
-<label for="">Decripción</label>
-<br>
+<h3 for="">Decripción</h3>
 <input type="text" [(ngModel)]='historia.descripcion'>
-<br>
-<label for="">Recordatorio</label>
-<br>
+<h3 for="">Recordatorio</h3>
 <input type="text" [(ngModel)]='historia.recordatorio'>
 <br>
-<button (click)='save()'>Submit</button>
+<button class="btn btn-default" (click)='cancel()' >Volver</button>
+<button class="btn btn-success" (click)='save()'>Submit</button>
+
+</div>

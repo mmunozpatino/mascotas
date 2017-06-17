@@ -4,14 +4,14 @@ import {ActivatedRoute,Router} from '@angular/router';
 
 @Component({
     selector: 'HistClincaNueva',
-    templateUrl: 'HistClinicaNueva.component.html'
+    templateUrl: 'HistClinicaNueva.component.html',
+    styleUrls:['HistClinicaNueva.component.css']
 })
 export class HistClinicaNueva implements OnInit{
     historia: HistoriaClinica;
     mascotaId: string;
     errorMessage: string;
     formSubmitted: boolean;
-    //hist: HistoriaClinica = {fecha: '06-06-2017', titulo: 'historia1', descripcion: 'descripcion1', recordatorio: 'recordatorio1'};
   errors: string[] = [];
     constructor(
         private service: HistClinicaService,
@@ -25,20 +25,12 @@ export class HistClinicaNueva implements OnInit{
         this.historia = {fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
-        /*
-        this.historia.id = 6;
-        console.log(this.historia);
-        this.cleanRestValidations();
-        this.historia.mascota_id = this.mascotaId;
-        this.service.guardarHistoria(this.historia);
-        this.router.navigate(['historia/'+this.mascotaId]);
-        this.service.guardarHistoria(this.historia);
-        console.log('Se guardo!');
-        */
         console.log(this.historia.fecha);
-        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then(historia => {this.router.navigate(['historia/'+this.mascotaId]);
-          console.log(this.historia)}).catch(error => this.procesarValidacionesRest(error));
-
+        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then(historia => {console.log(this.historia)}).catch(error => this.procesarValidacionesRest(error));
+        this.router.navigate(['historia/'+ this.mascotaId]);
+    }
+    cancel(){
+        this.router.navigate(['historia/'+ this.mascotaId]);
     }
     cleanRestValidations() {
     this.errorMessage = undefined;
