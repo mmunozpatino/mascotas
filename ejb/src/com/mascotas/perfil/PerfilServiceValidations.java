@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import com.mascotas.application.exceptions.BusinessException;
 import com.mascotas.application.exceptions.ValidationError;
 import com.mascotas.perfil.dto.ActualizarPerfilDTO;
 import com.mascotas.perfil.repository.PerfilesRepository;
@@ -27,21 +28,17 @@ public class PerfilServiceValidations {
 	@EJB
 	private ProvinciasRepository provinciaRepository;
 
-	public List<ValidationError> validarFindForLogin(String login) {
-		List<ValidationError> errors = new ArrayList<ValidationError>();
-
+	public void validarFindForLogin(String login) {
 		if (login == null || login.isEmpty()) {
-			errors.add(new ValidationError("login", "Debe definir el login de usuario."));
-			return errors;
+			throw new BusinessException("Datos de perfil invalidos.",
+					new ValidationError("login", "Debe definir el login de usuario."));
 		}
 
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "El usuario especificado no se encuentra."));
-			return errors;
+			throw new BusinessException("Datos de perfil invalidos.",
+					new ValidationError("login", "El usuario especificado no se encuentra."));
 		}
-
-		return errors;
 	}
 
 	/**
@@ -53,30 +50,30 @@ public class PerfilServiceValidations {
 	 *            Perfil a actualizar.
 	 * @return
 	 */
-	public List<ValidationError> validarActualizarPerfil(String login, ActualizarPerfilDTO perfil) {
+	public void validarActualizarPerfil(String login, ActualizarPerfilDTO perfil) {
 
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		if (login == null || login.isEmpty()) {
-			errors.add(new ValidationError("login", "Debe definir el login de usuario."));
-			return errors;
+			throw new BusinessException("Datos de perfil invalidos.",
+					new ValidationError("login", "Debe definir el login de usuario."));
 		}
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "El usuario especificado no se encuentra."));
-			return errors;
+			throw new BusinessException("Datos de perfil invalidos.",
+					new ValidationError("login", "El usuario especificado no se encuentra."));
 		}
 
 		if (perfil == null) {
-			errors.add(new ValidationError("perfil", "Debe definir el perfil a actualizar."));
-			return errors;
+			throw new BusinessException("Datos de perfil invalidos.",
+					new ValidationError("perfil", "Debe definir el perfil a actualizar."));
 		}
 
 		if (perfil.getProvincia() != null && perfil.getProvincia() > 0) {
 			Provincia provincia = provinciaRepository.get(perfil.getProvincia());
 			if (provincia == null) {
-				errors.add(new ValidationError("provincia", "La provincia proporcionada es incorrecta."));
-				return errors;
+				throw new BusinessException("Datos de perfil invalidos.",
+						new ValidationError("provincia", "La provincia proporcionada es incorrecta."));
 			}
 		}
 
@@ -84,8 +81,8 @@ public class PerfilServiceValidations {
 			errors.add(new ValidationError("nombre", "Tu nombre es requerido."));
 		}
 
-		// TODO Auto-generated method stub
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de perfil invalidos.", errors);
+		}
 	}
-
 }

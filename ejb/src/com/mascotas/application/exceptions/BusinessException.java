@@ -35,6 +35,14 @@ public class BusinessException extends RuntimeException {
 		}
 	}
 
+
+	public BusinessException(String mensaje, ValidationError validationError) {
+		super(mensaje);
+		if (errores != null) {
+			this.errores.add(validationError);
+		}
+	}
+	
 	public List<ValidationError> getErrores() {
 		return errores;
 	}

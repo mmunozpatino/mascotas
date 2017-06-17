@@ -11,7 +11,6 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.mascotas.application.exceptions.BusinessException;
-import com.mascotas.application.exceptions.ValidationError;
 import com.mascotas.application.utils.StringUtils;
 import com.mascotas.mascotas.dto.MascotaDTO;
 import com.mascotas.mascotas.entities.Mascota;
@@ -43,10 +42,7 @@ public class MascotaService {
 	 * 
 	 */
 	public List<MascotaDTO> findForLogin(String login) throws BusinessException {
-		List<ValidationError> errors = mascotaValidations.validarFindForLogin(login);
-		if (errors.size() > 0) {
-			throw new BusinessException("Datos de usuario invalidos.", errors);
-		}
+		mascotaValidations.validarFindForLogin(login);
 
 		List<Mascota> mascotas = mascotaRepository.getByUsuario(login);
 
@@ -59,10 +55,7 @@ public class MascotaService {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public int actualizarMascota(String login, MascotaDTO mascota) throws BusinessException {
-		List<ValidationError> errors = mascotaValidations.validarActualizarMascota(login, mascota);
-		if (errors.size() > 0) {
-			throw new BusinessException("Error al guardar mascota.", errors);
-		}
+		mascotaValidations.validarActualizarMascota(login, mascota);
 
 		Mascota mascotaEditada = null;
 		if (mascota.getId() != null) {
@@ -84,27 +77,19 @@ public class MascotaService {
 		} catch (Exception e) {
 		}
 		mascotaEditada.setNombre(mascota.getNombre());
-		
+
 		return mascotaEditada.getId();
 	}
 
 	public MascotaDTO findById(String login, Integer id) throws BusinessException {
-		List<ValidationError> errors = mascotaValidations.validarFindById(login, id);
-
-		if (errors.size() > 0) {
-			throw new BusinessException("Error al recuperar la Mascota.", errors);
-		}
+		mascotaValidations.validarFindById(login, id);
 
 		return MascotaDTO.Factory.get(mascotaRepository.get(id));
 	}
 
 	public void eliminarMascota(String name, Integer id) {
-		List<ValidationError> errors = mascotaValidations.validarEliminarMascota(name, id);
-		if (errors.size() > 0) {
-			throw new BusinessException("Error al eliminar la Mascota.", errors);
-		}
+		mascotaValidations.validarEliminarMascota(name, id);
 
-		
 		mascotaRepository.remove(mascotaRepository.get(id));
 	}
 }

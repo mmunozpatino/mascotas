@@ -1,7 +1,5 @@
 package com.mascotas.seguridad;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -11,7 +9,6 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.mascotas.application.exceptions.BusinessException;
-import com.mascotas.application.exceptions.ValidationError;
 import com.mascotas.seguridad.dto.ActualizarUsuarioDTO;
 import com.mascotas.seguridad.dto.RegistrarUsuarioDTO;
 import com.mascotas.seguridad.dto.RolSeguridad;
@@ -58,10 +55,7 @@ public class UsuariosService {
 	 * 
 	 */
 	public void actualizarUsuario(ActualizarUsuarioDTO usuario) throws BusinessException {
-		List<ValidationError> errors = seguridadServiceValidations.validarActualizarUsuario(usuario);
-		if (errors.size() > 0) {
-			throw new BusinessException("Datos de usuario invalidos.", errors);
-		}
+		seguridadServiceValidations.validarActualizarUsuario(usuario);
 
 		Usuario usuarioEditado = usuariosRepository.get(usuario.getLogin());
 		for (RolSeguridad r : usuarioEditado.getRoles()) {
@@ -82,10 +76,7 @@ public class UsuariosService {
 	 * 
 	 */
 	public void registrarUsuario(RegistrarUsuarioDTO usuario) throws BusinessException {
-		List<ValidationError> errors = seguridadServiceValidations.validarRegistrarUsuario(usuario);
-		if (errors.size() > 0) {
-			throw new BusinessException("Datos de usuario invalidos.", errors);
-		}
+		seguridadServiceValidations.validarRegistrarUsuario(usuario);
 
 		Usuario usuarioNuevo = new Usuario();
 		usuarioNuevo.setLogin(usuario.getLogin());
@@ -105,10 +96,7 @@ public class UsuariosService {
 	 * 
 	 */
 	public void actualizarPassword(String login, String passwAnterior, String passwNuevo) throws BusinessException {
-		List<ValidationError> errors = seguridadServiceValidations.validarCambioPassword(login, passwAnterior, passwNuevo);
-		if (errors.size() > 0) {
-			throw new BusinessException("Datos de usuario invalidos.", errors);
-		}
+		seguridadServiceValidations.validarCambioPassword(login, passwAnterior, passwNuevo);
 
 		Usuario usr = usuariosRepository.get(login);
 		usr.setPlainTextPassword(login, passwNuevo);
@@ -119,10 +107,7 @@ public class UsuariosService {
 	 * 
 	 */
 	public void activarUsuario(String login) throws BusinessException {
-		List<ValidationError> errors = seguridadServiceValidations.validarActivarUsuario(login);
-		if (errors.size() > 0) {
-			throw new BusinessException("No se puede activar el usuario.", errors);
-		}
+		seguridadServiceValidations.validarActivarUsuario(login);
 
 		Usuario usr = usuariosRepository.get(login);
 		usr.setFinVigencia(null);
@@ -133,10 +118,7 @@ public class UsuariosService {
 	 * 
 	 */
 	public void desactivarUsuario(String login) throws BusinessException {
-		List<ValidationError> errors = seguridadServiceValidations.validarDesactivarUsuario(login);
-		if (errors.size() > 0) {
-			throw new BusinessException("No se puede desacivar el usuario.", errors);
-		}
+		seguridadServiceValidations.validarDesactivarUsuario(login);
 
 		Usuario usr = usuariosRepository.get(login);
 		usr.setFinVigencia(new java.util.Date());

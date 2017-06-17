@@ -40,7 +40,8 @@ public class UsuariosServiceValidations {
 	 * @param usuario
 	 * @throws BusinessException
 	 */
-	public List<ValidationError> validarRegistrarUsuario(RegistrarUsuarioDTO usuario) {
+	public void validarRegistrarUsuario(RegistrarUsuarioDTO usuario) {
+
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
@@ -51,7 +52,9 @@ public class UsuariosServiceValidations {
 			errors.add(new ValidationError("login", "El usuario ya existe en la base de datos."));
 		}
 
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 
 	/**
@@ -60,7 +63,7 @@ public class UsuariosServiceValidations {
 	 * @param usuario
 	 * @throws BusinessException
 	 */
-	public List<ValidationError> validarActualizarUsuario(ActualizarUsuarioDTO usuario) {
+	public void validarActualizarUsuario(ActualizarUsuarioDTO usuario) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		if (usuario.getRoles().size() == 0) {
@@ -75,7 +78,9 @@ public class UsuariosServiceValidations {
 			errors.add(new ValidationError("login", "El usuario no existe en la base de datos."));
 		}
 
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 
 	/**
@@ -85,7 +90,7 @@ public class UsuariosServiceValidations {
 	 * @param passwordViejo
 	 * @param passwordNuevo
 	 */
-	public List<ValidationError> validarCambioPassword(String login, String passwordViejo, String passwordNuevo) {
+	public void validarCambioPassword(String login, String passwordViejo, String passwordNuevo) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		Usuario usr = usuariosRepository.get(login);
@@ -99,7 +104,9 @@ public class UsuariosServiceValidations {
 			errors.add(new ValidationError("passwordViejo", "La contrase�a actual es incorrecta."));
 		}
 
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 
 	/**
@@ -110,9 +117,11 @@ public class UsuariosServiceValidations {
 	 * @throws ConstraintViolationException
 	 */
 	public void validarEntityBeanUsuario(Usuario usuarioNuevo) throws ConstraintViolationException {
-		Set<ConstraintViolation<Usuario>> errors = Validation.buildDefaultValidatorFactory().getValidator().validate(usuarioNuevo);
+		Set<ConstraintViolation<Usuario>> errors = Validation.buildDefaultValidatorFactory().getValidator()
+				.validate(usuarioNuevo);
 		if (!errors.isEmpty()) {
-			throw new ConstraintViolationException("Errores de validacion", new HashSet<ConstraintViolation<?>>(errors));
+			throw new ConstraintViolationException("Errores de validacion",
+					new HashSet<ConstraintViolation<?>>(errors));
 		}
 	}
 
@@ -121,7 +130,7 @@ public class UsuariosServiceValidations {
 	 * 
 	 * @param login
 	 */
-	public List<ValidationError> validarActivarUsuario(String login) {
+	public void validarActivarUsuario(String login) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		Usuario usr = usuariosRepository.get(login);
@@ -129,7 +138,9 @@ public class UsuariosServiceValidations {
 			errors.add(new ValidationError("login", "El usuario no existe en la base de datos."));
 		}
 
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 
 	/**
@@ -137,7 +148,7 @@ public class UsuariosServiceValidations {
 	 * 
 	 * @param login
 	 */
-	public List<ValidationError> validarDesactivarUsuario(String login) {
+	public void validarDesactivarUsuario(String login) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		Usuario usr = usuariosRepository.get(login);
@@ -145,7 +156,8 @@ public class UsuariosServiceValidations {
 			errors.add(new ValidationError("login", "El usuario no existe en la base de datos."));
 		}
 
-		return errors;
-
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 }

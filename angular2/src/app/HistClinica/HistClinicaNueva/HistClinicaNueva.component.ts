@@ -8,10 +8,10 @@ import {ActivatedRoute,Router} from '@angular/router';
 })
 export class HistClinicaNueva implements OnInit{
     historia: HistoriaClinica;
-    @Input() mascotaId: string;
+    mascotaId: string;
     errorMessage: string;
     formSubmitted: boolean;
-    hist: HistoriaClinica = {id: 9, fecha: '06-06-2017', titulo: 'historia1', descripcion: 'descripcion1', recordatorio: 'recordatorio1'};
+    //hist: HistoriaClinica = {fecha: '06-06-2017', titulo: 'historia1', descripcion: 'descripcion1', recordatorio: 'recordatorio1'};
   errors: string[] = [];
     constructor(
         private service: HistClinicaService,
@@ -19,7 +19,10 @@ export class HistClinicaNueva implements OnInit{
         private router: Router,
     ){}
     ngOnInit(){
-        this.historia = {id: null, fecha: '', titulo: '', descripcion: '', recordatorio: ''};
+        this.route.params.subscribe(params => {
+          this.mascotaId = params['id'];
+        })
+        this.historia = {fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
         /*
@@ -32,7 +35,8 @@ export class HistClinicaNueva implements OnInit{
         this.service.guardarHistoria(this.historia);
         console.log('Se guardo!');
         */
-        this.service.guardarHistoria(this.hist,parseInt(this.mascotaId)).then(historia => {this.router.navigate(['historia/'+this.mascotaId]);
+        console.log(this.historia.fecha);
+        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then(historia => {this.router.navigate(['historia/'+this.mascotaId]);
           console.log(this.historia)}).catch(error => this.procesarValidacionesRest(error));
 
     }

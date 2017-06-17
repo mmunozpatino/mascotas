@@ -8,7 +8,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import com.mascotas.application.rest.CORSFilter;
-import com.mascotas.historias.rest.HistoriaController;
+import com.mascotas.historia.rest.HistoriaController;
 import com.mascotas.mascotas.rest.MascotaController;
 import com.mascotas.perfil.rest.PerfilController;
 import com.mascotas.provincias.rest.ProvinciaController;

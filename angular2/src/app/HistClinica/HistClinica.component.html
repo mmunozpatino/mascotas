@@ -27,9 +27,7 @@
 		</tbody>
 	</table>
 	<button class="btn btn-success" (click)='goNew()'>Nueva</button>
-	<div *ngIf="nueva">
-		<HistClincaNueva [mascotaId]='idMascota'></HistClincaNueva>
-	</div>
+	
 </div>
 <input type="date" [(ngModel)]='fecha'>
 <label for="">{{fecha}}</label>

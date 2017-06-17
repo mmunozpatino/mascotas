@@ -51,7 +51,7 @@ export class HistClinicaService extends RestBaseService{
   }
  
   guardarHistoria(value: HistoriaClinica, idm: number): Promise<HistoriaClinica> {
-      return this.http.post(HistClinicaService.serverUrl + this.url, JSON.stringify(value), this.getRestHeader())
+      return this.http.post(HistClinicaService.serverUrl + this.url + '/' + idm, JSON.stringify(value), this.getRestHeader())
       .toPromise()
       .then(response => {
         return response.json() as HistoriaClinica;
@@ -73,7 +73,6 @@ export class HistClinicaService extends RestBaseService{
 }
 
 export interface HistoriaClinica{
-    id: number;
     fecha:string;
     titulo: string;
     descripcion: string;

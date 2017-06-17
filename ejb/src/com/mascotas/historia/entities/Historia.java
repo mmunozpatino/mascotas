@@ -1,6 +1,6 @@
-package com.mascotas.historias.entities;
+package com.mascotas.historia.entities;
 
-
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,11 +15,11 @@ import javax.persistence.TemporalType;
 
 import com.mascotas.mascotas.entities.Mascota;
 
-@Entity(name = "historia")
-public class Historia {
-	private static final long serialVersionUID = 1L;
+@Entity(name="historia")
+public class Historia implements Serializable{
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -27,18 +27,17 @@ public class Historia {
 	@Column(nullable = false)
 	private String titulo;
 
-	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private java.util.Date fecha;
 
 	private String descripcion;
 
-	private String recordatorio;
+    private String recordatorio;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Mascota mascota;
 
-	public Integer getId() {
+    public Integer getId() {
 		return id;
 	}
 
@@ -46,15 +45,15 @@ public class Historia {
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return this.titulo;
+    public String getTitulo() {
+		return titulo;
 	}
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
-	public java.util.Date getFecha() {
+    public java.util.Date getFecha() {
 		return fecha;
 	}
 
@@ -62,7 +61,7 @@ public class Historia {
 		this.fecha = fecha;
 	}
 
-	public String getDescripcion() {
+    public String getDescripcion() {
 		return descripcion;
 	}
 
@@ -70,18 +69,20 @@ public class Historia {
 		this.descripcion = descripcion;
 	}
 
-	public String getRecordatorio() {
+    public String getRecordatorio() {
 		return recordatorio;
 	}
 
 	public void setRecordatorio(String recordatorio) {
 		this.recordatorio = recordatorio;
 	}
-	public Mascota getMascota() {
-		return mascota;
-	}
 
-	public void setMascota(Mascota mascota) {
-		this.mascota = mascota;
-	}
+    public Mascota getMascota(){
+        return mascota;
+    }
+
+    public void setMascota(Mascota mascota){
+        this.mascota = mascota;
+    }
+
 }

@@ -47,10 +47,7 @@ public class PerfilService {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public ActualizarPerfilDTO findForLogin(String login) throws BusinessException {
-		List<ValidationError> errors = perfilValidations.validarFindForLogin(login);
-		if (errors.size() > 0) {
-			throw new BusinessException("Datos de usuario invalidos.", errors);
-		}
+		perfilValidations.validarFindForLogin(login);
 
 		Usuario usuario = usuarioRepository.get(login);
 		Perfil perfil = perfilRepository.getByUsuario(usuario.getLogin());
@@ -68,11 +65,7 @@ public class PerfilService {
 	 * 
 	 */
 	public void actualizarPerfil(String login, ActualizarPerfilDTO perfil) throws BusinessException {
-		List<ValidationError> errors = perfilValidations.validarActualizarPerfil(login, perfil);
-
-		if (errors.size() > 0) {
-			throw new BusinessException("Error al guardar el perfil.", errors);
-		}
+		perfilValidations.validarActualizarPerfil(login, perfil);
 
 		Perfil perfilEditado = perfilRepository.getByUsuario(login);
 		if (perfilEditado == null) {

@@ -28,6 +28,6 @@ export class HistClinica implements OnInit{
         })
     }
     goNew(){
-        this.nueva = true;
+        this.router.navigate(['historiaNueva/'+this.idMascota]);
     }
 }

@@ -6,7 +6,9 @@
 <br>
 <label for="">Fecha</label>
 <br>
-<input type="date" [(ngModel)]='historia.fecha'>
+<ng2-datepicker class="form-control"  name="fechaNacimiento" [options]="{ format: 'DD/MM/YYYY'}"
+			[ngModel]="historia.fecha | datePicker" [class.errorBorder]="!historia.fecha || errors['fecha']"
+			(ngModelChange)="historia.fecha=$event.formatted" ></ng2-datepicker>
 <br>
 <label for="">Decripción</label>
 <br>

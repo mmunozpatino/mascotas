@@ -2,13 +2,13 @@ package com.mascotas.mascotas;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import com.mascotas.application.exceptions.BusinessException;
 import com.mascotas.application.exceptions.ValidationError;
 import com.mascotas.application.utils.StringUtils;
 import com.mascotas.mascotas.dto.MascotaDTO;
@@ -40,21 +40,17 @@ public class MascotaServiceValidations {
 	 * @param login
 	 * @return
 	 */
-	public List<ValidationError> validarFindForLogin(String login) {
-		List<ValidationError> errors = new ArrayList<ValidationError>();
-
+	public void validarFindForLogin(String login) {
 		if (login == null || login.isEmpty()) {
-			errors.add(new ValidationError("login", "Debe definir el login de usuario."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "Debe definir el login de usuario."));
 		}
 
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "El usuario especificado no se encuentra."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "El usuario especificado no se encuentra."));
 		}
-
-		return errors;
 	}
 
 	/**
@@ -66,26 +62,26 @@ public class MascotaServiceValidations {
 	 *            Mascota a actualizar.
 	 * @return
 	 */
-	public List<ValidationError> validarActualizarMascota(String login, MascotaDTO mascota) {
+	public void validarActualizarMascota(String login, MascotaDTO mascota) {
 		List<ValidationError> errors = new ArrayList<ValidationError>();
 
 		if (login == null || login.isEmpty()) {
-			errors.add(new ValidationError("login", "Debe definir el login de usuario."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "Debe definir el login de usuario."));
 		}
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "El usuario especificado no se encuentra."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "El usuario especificado no se encuentra."));
 		}
 
 		if (mascota == null) {
-			errors.add(new ValidationError("perfil", "Debe definir el perfil a actualizar."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("perfil", "Debe definir el perfil a actualizar."));
 		}
-		
-		if(mascota.getId() != null) {
-			errors.addAll(validarFindById(login,mascota.getId()));
+
+		if (mascota.getId() != null) {
+			validarFindById(login, mascota.getId());
 		}
 
 		try {
@@ -93,17 +89,19 @@ public class MascotaServiceValidations {
 		} catch (ParseException e) {
 			errors.add(new ValidationError("fechaNacimiento", "Debe definir la fecha de nacimiento."));
 		}
-		
-		if(mascota.getFechaNacimiento() == null) {
+
+		if (mascota.getFechaNacimiento() == null) {
 			errors.add(new ValidationError("fechaNacimiento", "Debe definir la fecha de nacimiento."));
 		}
-		
+
 		if (mascota.getNombre() == null || mascota.getNombre().length() < 3) {
 			errors.add(new ValidationError("nombre", "Debe definir el nombre de la mascota."));
 		}
 
 		// TODO Auto-generated method stub
-		return errors;
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
 	}
 
 	/**
@@ -114,25 +112,19 @@ public class MascotaServiceValidations {
 	 * @param id
 	 * @return
 	 */
-	public List<ValidationError> validarFindById(String login, Integer id) {
-		List<ValidationError> errors = new ArrayList<ValidationError>();
-
+	public void validarFindById(String login, Integer id) {
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "Usuario no logueado."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "Usuario no logueado."));
 		}
 
 		Mascota m = mascotaRepository.get(id);
 		if (m == null || m.getUsuario() == null || !m.getUsuario().getLogin().equals(login)) {
-			errors.add(new ValidationError("login", "La mascota requerida no pertenece al usuario logueado."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "La mascota requerida no pertenece al usuario logueado."));
 		}
-
-		return errors;
-
 	}
-
 
 	/**
 	 * Valida que el usuario logueado tenga permisos para acceder a la mascota
@@ -142,22 +134,17 @@ public class MascotaServiceValidations {
 	 * @param id
 	 * @return
 	 */
-	public List<ValidationError> validarEliminarMascota(String login, Integer id) {
-		List<ValidationError> errors = new ArrayList<ValidationError>();
-
+	public void validarEliminarMascota(String login, Integer id) {
 		Usuario usuario = usuariosRepository.get(login);
 		if (usuario == null) {
-			errors.add(new ValidationError("login", "Usuario no logueado."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "Usuario no logueado."));
 		}
 
 		Mascota m = mascotaRepository.get(id);
 		if (m == null || m.getUsuario() == null || !m.getUsuario().getLogin().equals(login)) {
-			errors.add(new ValidationError("login", "La mascota requerida no pertenece al usuario logueado."));
-			return errors;
+			throw new BusinessException("Datos de usuario invalidos.",
+					new ValidationError("login", "La mascota requerida no pertenece al usuario logueado."));
 		}
-
-		return errors;
-
 	}
 }

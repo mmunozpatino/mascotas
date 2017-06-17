@@ -1,4 +1,4 @@
-package com.mascotas.historias.dto;
+package com.mascotas.historia.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,19 +8,18 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import com.mascotas.application.utils.StringUtils;
-import com.mascotas.historias.entities.Historia;
-import com.mascotas.mascotas.entities.Mascota;
+import com.mascotas.historia.entities.Historia;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HistoriasDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class HistoriaDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
-	private Mascota mascota;
 	private String titulo;
 	private String fecha;
 	private String descripcion;
-    private String recordatorio;
+	private String recordatorio;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -29,7 +28,7 @@ public class HistoriasDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitulo() {
+    public String getTitulo() {
 		return titulo;
 	}
 
@@ -37,7 +36,7 @@ public class HistoriasDTO implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getFecha() {
+    public String getFecha() {
 		return fecha;
 	}
 
@@ -45,13 +44,14 @@ public class HistoriasDTO implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public String getDescripcion() {
+    public String getDescripcion() {
 		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
     public String getRecordatorio() {
 		return recordatorio;
 	}
@@ -60,36 +60,25 @@ public class HistoriasDTO implements Serializable {
 		this.recordatorio = recordatorio;
 	}
 	
-	public Mascota getMascota(){
-		return this.mascota;
-	}
-	
-	public void setMascota(Mascota mascota){
-		this.mascota = mascota;
-	}
-	/**
-	 * Factorys para crear DTO a partir de Entity
-	 * 
-	 * @author nestor
-	 *
-	 */
 	public static class Factory {
-		public static HistoriasDTO get(Historia historia) {
-			HistoriasDTO result = new HistoriasDTO();
+		public static HistoriaDTO get(Historia historia) {
+			HistoriaDTO result = new HistoriaDTO();
 			result.id = historia.getId();
 			result.titulo = historia.getTitulo();
-            result.fecha = StringUtils.DATE_FORMAT.format(historia.getFecha());
+			if (historia.getFecha() != null) {
+				result.fecha = StringUtils.DATE_FORMAT.format(historia.getFecha());
+			}
 			result.descripcion = historia.getDescripcion();
+			result.recordatorio = historia.getRecordatorio();
 			return result;
 		}
 
-		public static List<HistoriasDTO> get(Collection<Historia> historias) {
-			ArrayList<HistoriasDTO> result = new ArrayList<HistoriasDTO>();
+		public static List<HistoriaDTO> get(Collection<Historia> historias) {
+			ArrayList<HistoriaDTO> result = new ArrayList<HistoriaDTO>();
 			for (Historia p : historias) {
 				result.add(get(p));
 			}
 			return result;
 		}
-
-	}
+	}    
 }
