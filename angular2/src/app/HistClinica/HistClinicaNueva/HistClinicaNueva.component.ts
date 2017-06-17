@@ -22,7 +22,7 @@ export class HistClinicaNueva implements OnInit{
         this.route.params.subscribe(params => {
           this.mascotaId = params['id'];
         })
-        this.historia = {fecha: '', titulo: '', descripcion: '', recordatorio: ''};
+        this.historia = {id:'', fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
         console.log(this.historia.fecha);

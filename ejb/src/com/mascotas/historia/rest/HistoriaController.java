@@ -4,17 +4,15 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.naming.NamingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.Consumes;
 
 import com.mascotas.application.dtos.FormError;
 import com.mascotas.application.exceptions.BusinessException;
@@ -77,6 +75,22 @@ public class HistoriaController{
 	public Response addHistoria(@PathParam("id") Integer id, HistoriaDTO dto) throws NamingException {
 		try {
 			historiaService.addHistoria(id, dto);
+			return Response.ok().build();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		}
+	}
+	@Path("/{id}")
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response deleteHistoria(@PathParam("id") Integer id) throws NamingException {
+		try {
+			historiaService.deleteHistoria(id);
 			return Response.ok().build();
 		} catch (BusinessException e) {
 			e.printStackTrace();

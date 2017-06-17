@@ -58,6 +58,9 @@ export class HistClinicaService extends RestBaseService{
       })
       .catch(this.handleError);
   }
+  borrarHistoria(id: number){
+    return this.http.delete(HistClinicaService.serverUrl + this.url + '/' + id, this.getRestHeader()).toPromise().then(() => console.log('se borro!'));
+  }
 /*
   eliminarHistoria(id: number): Promise<any> {
     if (id) {
@@ -73,6 +76,7 @@ export class HistClinicaService extends RestBaseService{
 }
 
 export interface HistoriaClinica{
+    id: string;
     fecha:string;
     titulo: string;
     descripcion: string;

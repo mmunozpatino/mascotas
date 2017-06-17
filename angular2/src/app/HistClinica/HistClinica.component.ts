@@ -14,6 +14,7 @@ export class HistClinica implements OnInit{
     historias: HistoriaClinica[];
     idMascota: string;
     nueva: boolean;
+    historia: HistoriaClinica;
     constructor(
         private service: HistClinicaService,
         private route: ActivatedRoute,
@@ -30,5 +31,12 @@ export class HistClinica implements OnInit{
     }
     goNew(){
         this.router.navigate(['historiaNueva/'+this.idMascota]);
+    }
+    delete(id: number){
+        this.service.borrarHistoria(id).then(()=> this.router.navigate(['historia/'+this.idMascota]));
+        this.service.getById(id.toString()).then(hist => this.historia = hist);
+        var n = this.historias.indexOf(this.historia);
+        this.historias.splice(n,1);
+        ;
     }
 }

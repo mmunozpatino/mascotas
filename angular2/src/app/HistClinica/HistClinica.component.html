@@ -4,10 +4,11 @@
 
 	<ul *ngFor='let h of historias'>				
 		
-		<li> 
+		<li > 
 			<h3>{{h.fecha}}</h3>
 			<h3>{{h.titulo}}</h3>
 			<img src="/assets/edit.png" name="editar"/>
+			<button id='delete' (click)='delete(h.id)'>Delete</button>
 			<a [routerLink]="['/historiaDetalle/'+h.id]">detalle</a>
 		</li>
 	</ul>

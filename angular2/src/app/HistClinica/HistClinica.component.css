@@ -40,3 +40,6 @@ li:hover{
 h3{
     display: inline-block;
 }
+#delete{
+    float: right;
+}

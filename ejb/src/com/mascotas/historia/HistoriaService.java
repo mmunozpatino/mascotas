@@ -58,4 +58,8 @@ public class HistoriaService{
 		historiaRepository.add(historia);
 		
 	}
+	public void deleteHistoria(Integer idHistoria){
+		Historia historia = historiaRepository.get(idHistoria);
+		historiaRepository.remove(historia);
+	}
 }

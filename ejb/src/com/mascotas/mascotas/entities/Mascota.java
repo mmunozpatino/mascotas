@@ -37,6 +37,11 @@ public class Mascota implements Serializable {
 	private java.util.Date fechaNacimiento;
 
 	private String descripcion;
+	
+	@Column(nullable = false)
+	private String especie;
+	
+	private String raza;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Usuario usuario;
@@ -79,5 +84,19 @@ public class Mascota implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public String getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+	public String getRaza() {
+		return raza;
+	}
+
+	public void setRaza(String raza) {
+		this.raza = raza;
 	}
 }
