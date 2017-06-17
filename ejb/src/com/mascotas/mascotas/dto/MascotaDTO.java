@@ -23,6 +23,8 @@ public class MascotaDTO implements Serializable {
 	private String nombre;
 	private String fechaNacimiento;
 	private String descripcion;
+	private String raza;
+	private String especie;
 
 	public Integer getId() {
 		return id;
@@ -55,6 +57,20 @@ public class MascotaDTO implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	public String getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+	public String getRaza() {
+		return raza;
+	}
+
+	public void setRaza(String raza) {
+		this.raza = raza;
+	}
 
 	/**
 	 * Factorys para crear DTO a partir de Entity
@@ -67,6 +83,8 @@ public class MascotaDTO implements Serializable {
 			MascotaDTO result = new MascotaDTO();
 			result.id = mascota.getId();
 			result.nombre = mascota.getNombre();
+			result.raza = mascota.getRaza();
+			result.especie = mascota.getEspecie();
 			if (mascota.getFechaNacimiento() != null) {
 				result.fechaNacimiento = StringUtils.DATE_FORMAT.format(mascota.getFechaNacimiento());
 			}

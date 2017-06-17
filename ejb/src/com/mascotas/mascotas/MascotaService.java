@@ -68,6 +68,8 @@ public class MascotaService {
 			mascotaEditada = new Mascota();
 			mascotaEditada.setUsuario(usuario);
 			mascotaEditada.setNombre(mascota.getNombre());
+			mascotaEditada.setEspecie(mascota.getEspecie());
+			mascotaEditada.setRaza(mascota.getRaza());
 			mascotaRepository.add(mascotaEditada);
 		}
 

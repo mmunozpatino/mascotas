@@ -19,7 +19,7 @@ export class NuevaMascotaComponent implements OnInit {
 
   constructor(private mascotasService: MascotaService,
     private route: ActivatedRoute, private router: Router) {
-    this.mascota = { id: null, nombre: '', fechaNacimiento: '', descripcion: '' };
+    this.mascota = { id: null, nombre: '', fechaNacimiento: '', descripcion: '', especie: '', raza: '' };
   }
 
   ngOnInit() {

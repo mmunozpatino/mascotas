@@ -15,6 +15,7 @@ import { MascotaComponent } from './mascota/mascota.component';
 import { MenuComponent } from './menu/menu.component';
 import { NuevaMascotaComponent } from './mascota/nueva-mascota.component';
 import { MascotaService } from './mascota/mascota.service';
+import {MascotaDetalle} from './mascota/mascotaDetalle.component';
 import { environment } from '../environments/environment';
 import { DatePickerPipe } from './tools/common-pipes.pipe';
 import { RegistrarUsuarioComponent } from './usuario/registrar-usuario.component';
@@ -34,6 +35,7 @@ import {HistClinicaNueva} from './HistClinica/HistClinicaNueva/HistClinicaNueva.
     MascotaComponent,
     MenuComponent,
     NuevaMascotaComponent,
+    MascotaDetalle,
     RegistrarUsuarioComponent,
     //Funcionalidad de las Historias Clinicas
     HistClinica,

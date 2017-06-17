@@ -1,0 +1,17 @@
+<div class='cuerpo'>
+    <h1>Datos de la mascota</h1>
+    <div *ngIf=mascota>
+        <h3>Nombre</h3>
+            <label for="">{{mascota.nombre}}</label>
+        <h3>Fecha Nacimiento:</h3>
+            <label for="">{{mascota.fechaNacimiento}}</label>
+        <h3>Especie</h3>
+            <label for="">{{mascota.especie}}</label>
+        <h3>Raza</h3>
+            <label for="">{{mascota.Raza}}</label>
+        <h3>Descripcion</h3>
+            <label for="">{{mascota.descripcion}}</label>
+    </div>
+</div>
+<button class="btn btn-default" (click)='delete()'>Delete</button>
+<button class="btn btn-success" (click)='ok()'>Ok</button>

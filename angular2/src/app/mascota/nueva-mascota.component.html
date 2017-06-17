@@ -42,6 +42,12 @@
 		<div *ngIf="errors['descripcion']" class="error">
 		    {{errors['descripcion']}}
 		</div>	
+		<label>Especie:</label> 
+		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
+			[(ngModel)]="mascota.especie" required [minlength]="3" [maxLength]="60">
+		<label>Raza:</label> 
+		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
+			[(ngModel)]="mascota.raza" required [minlength]="3" [maxLength]="60">
 	</div>
 
 

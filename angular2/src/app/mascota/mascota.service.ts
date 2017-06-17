@@ -63,4 +63,6 @@ export interface Mascota {
   nombre: string;
   fechaNacimiento: string;
   descripcion: string;
+  especie: string;
+  raza: string;
 }

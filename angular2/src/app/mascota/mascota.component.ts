@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MascotaService, Mascota } from './mascota.service'
 import { Observable } from 'rxjs/Rx';
+import { Router } from "@angular/router";
 
 
 @Component( {
@@ -11,12 +12,17 @@ import { Observable } from 'rxjs/Rx';
 export class MascotaComponent implements OnInit {
     errorMessage: string;
     mascotas: Mascota[];
+    m: Mascota;
 
-    constructor( private mascotasService: MascotaService ) { }
+    constructor( private mascotasService: MascotaService,
+                private router: Router ) { }
 
     ngOnInit() {
         this.mascotasService.buscarMascotas()
           .then(mascotas => this.mascotas = mascotas)
           .catch(error => this.errorMessage = <any>error );
+    }
+    detalle(m: Mascota){
+        this.router.navigate(['mascotaDetalle/'+m.id]);
     }
 }
