@@ -9,17 +9,7 @@ import { Mascota, MascotaService } from "app/mascota/mascota.service";
 @Injectable()
 export class HistClinicaService extends RestBaseService{
     
-    mascota: Mascota;
-    /*get(){
-        return HISTORIAS;
-    }*/
-    post(h: HistoriaClinica){
-        HISTORIAS.push(h);
-    }
-    /*buscarHistoria(id: number){
-        return HISTORIAS.find(historia => historia.id == id);
-    }*/
-    
+    mascota: Mascota;    
     
     private url = '/rest/historia';
 
@@ -61,18 +51,15 @@ export class HistClinicaService extends RestBaseService{
   borrarHistoria(id: number){
     return this.http.delete(HistClinicaService.serverUrl + this.url + '/' + id, this.getRestHeader()).toPromise().then(() => console.log('se borro!'));
   }
-/*
-  eliminarHistoria(id: number): Promise<any> {
-    if (id) {
-      return this.http.delete(HistClinicaService.serverUrl + this.url + '/' + id, this.getRestHeader())
-      .toPromise()
-      .then(response => {
-        return "";
-      })
-      .catch(this.handleError);
-    }
-  }*/
+  deleteByMascota(id: number){
+    let historias: HistoriaClinica[];
+    return this.getByMascota(id.toString()).then(hist => {historias = hist
+          for(let h of historias){
+            this.borrarHistoria(+h.id);
+          }
+  });
 
+  }
 }
 
 export interface HistoriaClinica{

@@ -22,11 +22,11 @@ export class HistClinicaNueva implements OnInit{
         this.route.params.subscribe(params => {
           this.mascotaId = params['id'];
         })
-        this.historia = {id:'', fecha: '', titulo: '', descripcion: '', recordatorio: ''};
+        this.historia = {id: this.mascotaId , fecha: '', titulo: '', descripcion: '', recordatorio: ''};
     }
     save(){
         console.log(this.historia.fecha);
-        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then(historia => {console.log(this.historia)}).catch(error => this.procesarValidacionesRest(error));
+        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then().catch(error => this.procesarValidacionesRest(error));
         this.router.navigate(['historia/'+ this.mascotaId]);
     }
     cancel(){

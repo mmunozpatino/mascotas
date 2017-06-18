@@ -39,4 +39,10 @@ export class HistClinica implements OnInit{
         this.historias.splice(n,1);
         ;
     }
+    detail(h: HistoriaClinica){
+        this.router.navigate(['/historiaDetalle/'+h.id]);
+    }
+    borrarTodo(){
+        this.service.deleteByMascota(+this.idMascota);
+    }
 }

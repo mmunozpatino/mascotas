@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { RestBaseService } from '../tools/rest.tools';
 import 'rxjs/add/operator/toPromise';
+import {HistClinicaService, HistoriaClinica} from '../HistClinica/HistClinica.service';
 
 @Injectable()
 export class MascotaService extends RestBaseService {
   private url = '/rest/mascota';
 
-  constructor(private http: Http) { super(); }
+  constructor(private http: Http) { 
+    super();
+  }
 
   buscarMascotas(): Promise<Mascota[]> {
     return this.http.get(MascotaService.serverUrl + this.url, this.getRestHeader())
