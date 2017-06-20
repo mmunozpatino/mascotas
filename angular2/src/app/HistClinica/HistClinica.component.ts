@@ -15,6 +15,7 @@ export class HistClinica implements OnInit{
     idMascota: string;
     nueva: boolean;
     historia: HistoriaClinica;
+    noHist: boolean;
     constructor(
         private service: HistClinicaService,
         private route: ActivatedRoute,
@@ -26,8 +27,14 @@ export class HistClinica implements OnInit{
             this.idMascota = params['id'];
             this.service.getByMascota(this.idMascota).then(hist => {
                 this.historias = hist;
-                console.log(this.historias);})
+                if(this.historias.length != 0){
+                    this.noHist = false;
+                }else{
+                    this.noHist = true;
+                }})
         })
+        
+        
     }
     goNew(){
         this.router.navigate(['historiaNueva/'+this.idMascota]);

@@ -1,0 +1,25 @@
+section{
+    box-sizing: border-box;
+    background-color: white;
+    width: 60em;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px #888888;
+    text-decoration: none;
+    padding: 10px;
+}
+h1{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    background-color: #b7c8e2;
+    margin: 0;
+    text-align: center;
+}
+span{
+    font-weight: 600;
+    font-size: 80%;
+}
+h2{
+    margin: 20px;
+}

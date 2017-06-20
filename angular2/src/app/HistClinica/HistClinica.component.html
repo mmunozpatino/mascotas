@@ -16,3 +16,14 @@
 	<button class="btn btn-default" [routerLink]="['/mascotas']" >Volver</button>
 	<button class="btn btn-success" (click)='goNew()'>Nueva</button>	
 </div>
+<div *ngIf='noHist' class='error'>
+	
+		<h1>Error!</h1>
+		<div class='msj'>
+		<h2>Su mascota no tiene ninguna historia!</h2>
+		<div class='botones'>
+			<button class="btn btn-default" [routerLink]="['/mascotas']" >Volver</button>
+			<button class="btn btn-success" (click)='goNew()'>Crear historia!</button>
+		</div>
+	</div>
+</div>
