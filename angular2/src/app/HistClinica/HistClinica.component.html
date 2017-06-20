@@ -10,8 +10,9 @@
 			<img src="/assets/edit.png" name="editar"/>
 			<button id='delete' (click)='delete(h.id)'>Delete</button>
 		</li>
-	</ul>
+	</ul>	
+</section>
+<div class='botones'>
 	<button class="btn btn-default" [routerLink]="['/mascotas']" >Volver</button>
 	<button class="btn btn-success" (click)='goNew()'>Nueva</button>	
-</section>
-<button (click)='borrarTodo()'> BORRAR</button>
+</div>

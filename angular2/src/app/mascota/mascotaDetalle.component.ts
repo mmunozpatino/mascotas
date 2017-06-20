@@ -13,6 +13,8 @@ export class MascotaDetalle implements OnInit{
     id: number;
     mascota: Mascota;
     historias: HistoriaClinica[];
+    histBorradas: boolean;
+    error: boolean;
     constructor(
         private service: MascotaService,
         private route: ActivatedRoute,
@@ -26,14 +28,22 @@ export class MascotaDetalle implements OnInit{
         });
         
     }
-    delete(){        
-        this.service.eliminarMascota(this.mascota.id);
-        this.router.navigate(['mascotas']);
+    delete(){
+        if(this.histBorradas){        
+            this.service.eliminarMascota(this.mascota.id);
+            this.router.navigate(['mascotas']);
+        }else{
+            this.error=true;
+        }
     }
     deleteHist(){
         this.serviceHistoria.deleteByMascota(this.mascota.id);
+        this.histBorradas=true;
     }
     ok(){
         this.router.navigate(['mascotas']);
+    }
+    ocultarMsj(){
+        this.error=false;
     }
 }
