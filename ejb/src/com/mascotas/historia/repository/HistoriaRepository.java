@@ -53,9 +53,10 @@ public class HistoriaRepository implements Repositorio<Integer, Historia> {
 
 	public List<Historia> getByMascota(Integer id) {
 		String q = "SELECT p from " + Historia.class.getName() +
-				" p JOIN p.mascota m WHERE  m.id = :id ";
+				" p JOIN p.mascota m WHERE  m.id = :id ORDER BY p.id DESC ";
 		TypedQuery<Historia> query = entityManager.createQuery(q, Historia.class);
 		query.setParameter("id", id);
 		return query.getResultList();
+		//WHERE  m.id = :id 
 	}
 }
