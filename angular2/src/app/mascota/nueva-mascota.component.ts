@@ -9,7 +9,8 @@ import { DatePickerModule } from 'ng2-datepicker';
 
 @Component({
   selector: 'app-nueva-mascota',
-  templateUrl: './nueva-mascota.component.html'
+  templateUrl: './nueva-mascota.component.html',
+  styleUrls: ['mascota.component.css']
 })
 export class NuevaMascotaComponent implements OnInit {
   mascota: Mascota;

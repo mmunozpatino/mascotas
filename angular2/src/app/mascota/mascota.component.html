@@ -1,12 +1,12 @@
 <section>	
 	<h1>Mascotas</h1>		
 	<div class='container'>
-		<ul *ngFor="let mascota of mascotas">
-			<li (click)='detalle(mascota)'>
+		<ul>
+			<li *ngFor="let mascota of mascotas">
 				<h3>{{mascota.nombre}}</h3> 
-				<img src="/assets/edit.png" name="editar" [routerLink]="['/nuevaMascota/' + mascota.id ]"
-						/>
-				<a [routerLink]="['/historia/'+mascota.id]" >Historias Clinicas</a>
+				<img src="/assets/historico.png" [routerLink]="['/historia/'+mascota.id]" />
+				<img src="/assets/edit.png" name="editar" [routerLink]="['/nuevaMascota/' + mascota.id ]"/>
+				<img src="/assets/detalles.png" (click)='detalle(mascota)'>
 			</li>
 		</ul>
 	</div>	

@@ -29,7 +29,8 @@ export class MascotaDetalle implements OnInit{
         
     }
     delete(){
-        if(this.histBorradas){        
+        
+        if(this.histBorradas){            
             this.service.eliminarMascota(this.mascota.id);
             this.router.navigate(['mascotas']);
         }else{

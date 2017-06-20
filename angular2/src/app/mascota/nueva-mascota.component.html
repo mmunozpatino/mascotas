@@ -1,6 +1,7 @@
+<section>
 <h1>{{mascota.id ? "Editar Mascota" : 'Nueva Mascota' }}</h1>
 
-<form novalidate #f="ngForm">
+<form novalidate #f="ngForm" >
 	
 	<div class="form-group">
 		<label>Nombre:</label> 
@@ -20,7 +21,6 @@
 	
 	<div class="form-group">
 		<label>Fecha de Nacimiento:</label> 
-		aca es :
 		<ng2-datepicker class="form-control"  name="fechaNacimiento" [options]="{ format: 'DD/MM/YYYY'}"
 			[ngModel]="mascota.fechaNacimiento | datePicker" [class.errorBorder]="!mascota.fechaNacimiento || errors['fechaNacimiento']"
 			(ngModelChange)="mascota.fechaNacimiento=$event.formatted" ></ng2-datepicker>
@@ -44,14 +44,16 @@
 		</div>	
 		<label>Especie:</label> 
 		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
-			[(ngModel)]="mascota.especie" required [minlength]="3" [maxLength]="60">
+			[(ngModel)]="mascota.especie" required>
 		<label>Raza:</label> 
 		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
-			[(ngModel)]="mascota.raza" required [minlength]="3" [maxLength]="60">
+			[(ngModel)]="mascota.raza" required>
 	</div>
 
-
-	<button class="btn btn-default" [routerLink]="['/mascotas']" >Cancelar</button>
-	<button class="btn btn-warning" *ngIf="mascota.id" (click)="onDelete()">Eliminar</button>
-	<button class="btn btn-success"  (click)="submitForm()" [disabled]="f.invalid">Guardar</button>
+	<div class='botones'>
+		<button class="btn btn-default" [routerLink]="['/mascotas']" >Cancelar</button>
+		<button class="btn btn-warning" *ngIf="mascota.id" (click)="onDelete()">Eliminar</button>
+		<button class="btn btn-success"  (click)="submitForm()" [disabled]="f.invalid">Guardar</button>
+	</div>
 </form>
+</section>
