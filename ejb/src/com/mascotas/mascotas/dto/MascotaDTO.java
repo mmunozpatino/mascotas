@@ -8,6 +8,7 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import com.mascotas.application.utils.StringUtils;
+import com.mascotas.especies.EspeciesService;
 import com.mascotas.mascotas.entities.Mascota;
 
 /**
@@ -17,6 +18,9 @@ import com.mascotas.mascotas.entities.Mascota;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MascotaDTO implements Serializable {
+	
+	private static EspeciesService especieService;
+	
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -24,7 +28,7 @@ public class MascotaDTO implements Serializable {
 	private String fechaNacimiento;
 	private String descripcion;
 	private String raza;
-	private String especie;
+	private Integer especie;
 
 	public Integer getId() {
 		return id;
@@ -57,11 +61,11 @@ public class MascotaDTO implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getEspecie() {
+	public Integer getEspecie() {
 		return especie;
 	}
 
-	public void setEspecie(String especie) {
+	public void setEspecie(Integer especie) {
 		this.especie = especie;
 	}
 	public String getRaza() {
@@ -83,8 +87,8 @@ public class MascotaDTO implements Serializable {
 			MascotaDTO result = new MascotaDTO();
 			result.id = mascota.getId();
 			result.nombre = mascota.getNombre();
-			result.raza = mascota.getRaza();
-			result.especie = mascota.getEspecie();
+			result.raza = mascota.getRaza();			
+			result.especie = mascota.getEspecie().getId();
 			if (mascota.getFechaNacimiento() != null) {
 				result.fechaNacimiento = StringUtils.DATE_FORMAT.format(mascota.getFechaNacimiento());
 			}

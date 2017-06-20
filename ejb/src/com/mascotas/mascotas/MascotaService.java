@@ -12,6 +12,8 @@ import javax.ejb.TransactionManagementType;
 
 import com.mascotas.application.exceptions.BusinessException;
 import com.mascotas.application.utils.StringUtils;
+import com.mascotas.especies.EspeciesService;
+import com.mascotas.especies.entities.Especie;
 import com.mascotas.mascotas.dto.MascotaDTO;
 import com.mascotas.mascotas.entities.Mascota;
 import com.mascotas.mascotas.repository.MascotaRepository;
@@ -36,6 +38,10 @@ public class MascotaService {
 
 	@EJB
 	private MascotaServiceValidations mascotaValidations;
+	
+	@EJB
+	private EspeciesService especieService;
+	
 
 	/**
 	 * Busca las Mascotas del usuario por login de usuario.
@@ -68,7 +74,7 @@ public class MascotaService {
 			mascotaEditada = new Mascota();
 			mascotaEditada.setUsuario(usuario);
 			mascotaEditada.setNombre(mascota.getNombre());
-			mascotaEditada.setEspecie(mascota.getEspecie());
+			mascotaEditada.setEspecie(especieService.findById(mascota.getEspecie()));
 			mascotaEditada.setRaza(mascota.getRaza());
 			mascotaRepository.add(mascotaEditada);
 		}

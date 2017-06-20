@@ -13,6 +13,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.mascotas.especies.entities.Especie;
 import com.mascotas.seguridad.entities.Usuario;
 
 /**
@@ -38,8 +39,8 @@ public class Mascota implements Serializable {
 
 	private String descripcion;
 	
-	@Column(nullable = false)
-	private String especie;
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	private Especie especie;
 	
 	private String raza;
 
@@ -85,11 +86,11 @@ public class Mascota implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public String getEspecie() {
+	public Especie getEspecie() {
 		return especie;
 	}
 
-	public void setEspecie(String especie) {
+	public void setEspecie(Especie especie) {
 		this.especie = especie;
 	}
 	public String getRaza() {
