@@ -15,3 +15,13 @@
 	<button class="btn btn-default" [routerLink]="['/']" >Volver</button>
 	<button class="btn btn-success" [routerLink]="['/nuevaMascota']">Nueva</button>	
 </div>
+<div class='error' *ngIf='noHist'>
+	<h1>Error!</h1>
+	<div class='msj'>
+		<h2>Parece que no tiene ninguna mascota!</h2>
+		<div class='botones'>
+			<button class="btn btn-default" [routerLink]="['/']" >Volver</button>
+			<button class="btn btn-success" [routerLink]="['/nuevaMascota']">Nueva</button>	
+		</div>
+	</div>
+</div>

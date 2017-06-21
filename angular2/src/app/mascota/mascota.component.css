@@ -70,3 +70,18 @@ li:hover{
 h3{
     display: inline-block;
 }
+.error{
+    width: 50%;
+    height: auto;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 20px #888888;
+    margin: auto;
+    color: black;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+}
+.msj{
+    background-color: white;
+    padding: 7px;
+}
