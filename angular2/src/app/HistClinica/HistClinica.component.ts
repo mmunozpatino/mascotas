@@ -16,13 +16,16 @@ export class HistClinica implements OnInit{
     nueva: boolean;
     historia: HistoriaClinica;
     noHist: boolean;
+    deletes: boolean;
     constructor(
         private service: HistClinicaService,
         private route: ActivatedRoute,
         private router: Router
     ){}
-    ngOnInit(){
-        //this.historias = this.service.get();
+    ngOnInit(){  
+        this.cargarComponente();        
+    }
+    cargarComponente(){
         this.route.params.subscribe(params => {
             this.idMascota = params['id'];
             this.service.getByMascota(this.idMascota).then(hist => {
@@ -33,23 +36,23 @@ export class HistClinica implements OnInit{
                     this.noHist = true;
                 }})
         })
-        
-        
     }
     goNew(){
         this.router.navigate(['historiaNueva/'+this.idMascota]);
     }
     delete(id: number){
-        this.service.borrarHistoria(id).then(()=> this.router.navigate(['historia/'+this.idMascota]));
-        this.service.getById(id.toString()).then(hist => this.historia = hist);
-        var n = this.historias.indexOf(this.historia);
-        this.historias.splice(n,1);
-        ;
+        this.service.borrarHistoria(id).then(()=> this.cargarComponente());        
+    }
+    deleteProv(){
+        this.deletes = true;
     }
     detail(h: HistoriaClinica){
         this.router.navigate(['/historiaDetalle/'+h.id]);
     }
     borrarTodo(){
         this.service.deleteByMascota(+this.idMascota);
+    }
+    cancelDelete(){
+        this.deletes = false;
     }
 }

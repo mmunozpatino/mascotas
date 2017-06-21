@@ -4,11 +4,21 @@
 
 	<ul *ngFor='let h of historias'>				
 		
-		<li (click)='detail(h)'> 
+		<li> 
 			<h3>{{h.fecha}}</h3>
 			<h3>{{h.titulo}}</h3>
-			<img src="/assets/edit.png" name="editar"/>
-			<button id='delete' (click)='delete(h.id)'>Delete</button>
+			<img src="/assets/delete.png" (click)='deleteProv()'>
+			<img src="/assets/detalles.png" (click)='detail(h)'>
+			<div class='error' *ngIf='deletes'>
+				<h1>Advertencia!</h1>
+				<div class='msj'>
+					<h2>Está seguro que desea borrar la historia "{{h.titulo}}" ?</h2>
+					<div class='botones'>
+						<button class="btn btn-default" (click)='cancelDelete()' >Cancelar</button>
+						<button class="btn btn-success" (click)='delete(h.id)'>Borrar</button>
+					</div>
+				</div>
+			</div>
 		</li>
 	</ul>	
 </section>
@@ -16,8 +26,7 @@
 	<button class="btn btn-default" [routerLink]="['/mascotas']" >Volver</button>
 	<button class="btn btn-success" (click)='goNew()'>Nueva</button>	
 </div>
-<div *ngIf='noHist' class='error'>
-	
+<div *ngIf='noHist' class='error'>	
 		<h1>Error!</h1>
 		<div class='msj'>
 		<h2>Su mascota no tiene ninguna historia!</h2>
