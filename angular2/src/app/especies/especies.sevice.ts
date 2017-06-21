@@ -19,6 +19,9 @@ export class EspeciesService extends RestBaseService{
       })
       .catch(this.handleError);
   }
+    getById(id: number){
+      return this.http.get(EspeciesService.serverUrl + this.url + '/' + id , this.getRestHeader()).toPromise().then(response => {return response.json() as Especie});
+    }
 }
 
 export interface Especie{

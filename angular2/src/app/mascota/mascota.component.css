@@ -25,6 +25,13 @@ input, ng2-datepicker{
     width: 50%;
     margin: auto;
 }
+
+select{
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    height: 35px;
+}
 .container{
     box-sizing: border-box;
     width: 50em;

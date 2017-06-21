@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import com.mascotas.application.utils.StringUtils;
 import com.mascotas.especies.EspeciesService;
 import com.mascotas.especies.dto.EspecieDTO;
+import com.mascotas.especies.entities.Especie;
 import com.mascotas.mascotas.entities.Mascota;
 import com.mascotas.provincias.dto.ProvinciaDTO;
 
@@ -30,6 +31,7 @@ public class MascotaDTO implements Serializable {
 	private String fechaNacimiento;
 	private String descripcion;
 	private String raza;
+	private Especie especie;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +72,14 @@ public class MascotaDTO implements Serializable {
 	public void setRaza(String raza) {
 		this.raza = raza;
 	}
+	
+	public Especie getEspecie(){
+		return especie;
+	}
+	
+	public void setEspecie(Especie id){
+		this.especie = id;
+	}
 
 	/**
 	 * Factorys para crear DTO a partir de Entity
@@ -87,6 +97,7 @@ public class MascotaDTO implements Serializable {
 				result.fechaNacimiento = StringUtils.DATE_FORMAT.format(mascota.getFechaNacimiento());
 			}
 			result.descripcion = mascota.getDescripcion();
+			result.especie = mascota.getEspecie();
 			return result;
 		}
 

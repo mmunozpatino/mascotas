@@ -24,15 +24,15 @@ export class MascotaDetalle implements OnInit{
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.id = +params['id'];
-            this.service.buscarMascota(this.id).then(m => this.mascota = m);
+            this.service.buscarMascota(this.id).then(m => {this.mascota = m;
+                console.log(this.mascota)});
         });
         
     }
     delete(){
         
         if(this.histBorradas){            
-            this.service.eliminarMascota(this.mascota.id);
-            this.router.navigate(['mascotas']);
+            this.service.eliminarMascota(this.mascota.id).then(() => this.router.navigate(['mascotas']));
         }else{
             this.error=true;
         }

@@ -19,10 +19,11 @@ export class NuevaMascotaComponent implements OnInit {
   formSubmitted: boolean;
   errors: string[] = [];
   especies: Especie[];
+  especie: number;
 
   constructor(private mascotasService: MascotaService,
     private route: ActivatedRoute, private router: Router, private especieService: EspeciesService) {
-    this.mascota = { id: null, nombre: '', fechaNacimiento: '', descripcion: '', especie: '', raza: '' };
+    this.mascota = { id: null, nombre: '', fechaNacimiento: '', descripcion: '', especie: null, raza: '' };
   }
 
   ngOnInit() {
@@ -39,11 +40,15 @@ export class NuevaMascotaComponent implements OnInit {
   }
 
   submitForm() {
+    this.especieService.getById(this.especie).then( esp => {this.mascota.especie = esp;
+      this.mascotasService.guardarMascota(this.mascota)
+      .then(mascota => this.router.navigate(['/mascotas']))
+      .catch(error => this.procesarValidacionesRest(error));});
     this.cleanRestValidations();
     console.log(this.mascota);
-    this.mascotasService.guardarMascota(this.mascota)
+    /*this.mascotasService.guardarMascota(this.mascota)
       .then(mascota => this.router.navigate(['/mascotas']))
-      .catch(error => this.procesarValidacionesRest(error));
+      .catch(error => this.procesarValidacionesRest(error));*/
     
   }
   

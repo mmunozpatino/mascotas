@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { RestBaseService } from '../tools/rest.tools';
 import 'rxjs/add/operator/toPromise';
 import {HistClinicaService, HistoriaClinica} from '../HistClinica/HistClinica.service';
+import { Especie } from "app/especies/especies.sevice";
 
 @Injectable()
 export class MascotaService extends RestBaseService {
@@ -66,6 +67,6 @@ export interface Mascota {
   nombre: string;
   fechaNacimiento: string;
   descripcion: string;
-  especie: string;
+  especie: Especie;
   raza: string;
 }

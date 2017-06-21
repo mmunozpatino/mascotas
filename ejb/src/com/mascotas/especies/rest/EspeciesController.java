@@ -39,4 +39,18 @@ public class EspeciesController{
 			return Response.status(500).entity(FormError.processError(e)).build();
 		}
 	}
+    @Path("/{id}")
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getById(@PathParam("id") Integer id) throws NamingException {
+		try {
+			return Response.ok().entity(especiesService.findById(id)).build();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(500).entity(FormError.processError(e)).build();
+		}
+	}
 }

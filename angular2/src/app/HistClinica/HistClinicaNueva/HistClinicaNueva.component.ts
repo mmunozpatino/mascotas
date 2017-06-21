@@ -26,8 +26,8 @@ export class HistClinicaNueva implements OnInit{
     }
     save(){
         console.log(this.historia.fecha);
-        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then().catch(error => this.procesarValidacionesRest(error));
-        this.router.navigate(['historia/'+ this.mascotaId]);
+        this.service.guardarHistoria(this.historia,parseInt(this.mascotaId)).then(()=>this.router.navigate(['historia/'+ this.mascotaId])).catch(error => this.procesarValidacionesRest(error));
+        
     }
     cancel(){
         this.router.navigate(['historia/'+ this.mascotaId]);

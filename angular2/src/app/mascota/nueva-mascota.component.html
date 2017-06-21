@@ -42,11 +42,12 @@
 		<div *ngIf="errors['descripcion']" class="error">
 		    {{errors['descripcion']}}
 		</div>	
-		<label>Especie:</label> 
-		<select name='especie' [(ngModel)]='mascota.especie' *ngIf='especies'>
+		<label>Especie:</label>
+		<br> 
+		<select name='especie' [(ngModel)]='especie' *ngIf='especies'>
 					<option *ngFor="let especie of especies" [value]="especie.id" >{{especie.nombreEspecie}}</option>
 		</select>	
-		
+		<br>
 		<label>Raza:</label> 
 		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
 			[(ngModel)]="mascota.raza" required>
