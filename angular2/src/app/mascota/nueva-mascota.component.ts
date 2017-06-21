@@ -45,11 +45,7 @@ export class NuevaMascotaComponent implements OnInit {
       .then(mascota => this.router.navigate(['/mascotas']))
       .catch(error => this.procesarValidacionesRest(error));});
     this.cleanRestValidations();
-    console.log(this.mascota);
-    /*this.mascotasService.guardarMascota(this.mascota)
-      .then(mascota => this.router.navigate(['/mascotas']))
-      .catch(error => this.procesarValidacionesRest(error));*/
-    
+    console.log(this.mascota);    
   }
   
   

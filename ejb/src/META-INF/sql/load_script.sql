@@ -39,3 +39,11 @@ INSERT INTO `provincia` (`id`,`nombre`) VALUES (1, 'Mendoza');
 INSERT INTO `provincia` (`id`,`nombre`) VALUES (2, 'San Juan');
 INSERT INTO `provincia` (`id`,`nombre`) VALUES (3, 'San Luis');
 
+CREATE TABLE `especie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreEspecie` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+INSERT INTO `especie` VALUES (1,'Perro'),(2,'Gato'),(3,'Iguana'),(4,'Pájaro'),(5,'Hurón'),(6,'Tortuga');
+

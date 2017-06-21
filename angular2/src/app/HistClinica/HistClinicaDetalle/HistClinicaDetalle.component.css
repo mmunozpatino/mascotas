@@ -14,9 +14,6 @@ h1{
     background-color: #b7c8e2;
     margin: 0;
 }
-.botones{
-    margin: auto;
-}
 .check{
     width: 64px;
     height: 64px;
@@ -30,4 +27,7 @@ h1{
     background-color: white;
     border: none;
     outline: none;
+}
+.botones{
+    margin: auto;
 }
