@@ -43,8 +43,10 @@
 		    {{errors['descripcion']}}
 		</div>	
 		<label>Especie:</label> 
-		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
-			[(ngModel)]="mascota.especie" required>
+		<select name='especie' [(ngModel)]='mascota.especie' *ngIf='especies'>
+					<option *ngFor="let especie of especies" [value]="especie.id" >{{especie.nombreEspecie}}</option>
+		</select>	
+		
 		<label>Raza:</label> 
 		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
 			[(ngModel)]="mascota.raza" required>
@@ -57,3 +59,4 @@
 	</div>
 </form>
 </section>
+<button (click)='getEspecies()'>get!</button>

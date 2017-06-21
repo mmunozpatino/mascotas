@@ -25,7 +25,8 @@ import {HistClinica} from './HistClinica/HistClinica.component';
 import {HistClinicaService} from './HistClinica/HistClinica.service';
 import {HistClinicaDetalle} from './HistClinica/HistClinicaDetalle/HistClinicaDetalle.component';
 import {HistClinicaNueva} from './HistClinica/HistClinicaNueva/HistClinicaNueva.component'
- 
+import { EspeciesService } from "app/especies/especies.sevice";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import {HistClinicaNueva} from './HistClinica/HistClinicaNueva/HistClinicaNueva.
     PerfilService, 
     { provide: APP_BASE_HREF, useValue: environment.baseHref },
     //Funcionalidad de las Historias Clinicas
-    HistClinicaService],
+    HistClinicaService,
+    EspeciesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

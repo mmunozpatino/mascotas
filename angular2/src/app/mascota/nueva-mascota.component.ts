@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { DatePickerPipe } from '../tools/common-pipes.pipe';
 import { DatePickerModule } from 'ng2-datepicker';
+import { EspeciesService, Especie } from "app/especies/especies.sevice";
 
 
 @Component({
@@ -17,9 +18,10 @@ export class NuevaMascotaComponent implements OnInit {
   errorMessage: string;
   formSubmitted: boolean;
   errors: string[] = [];
+  especies: Especie[];
 
   constructor(private mascotasService: MascotaService,
-    private route: ActivatedRoute, private router: Router) {
+    private route: ActivatedRoute, private router: Router, private especieService: EspeciesService) {
     this.mascota = { id: null, nombre: '', fechaNacimiento: '', descripcion: '', especie: '', raza: '' };
   }
 
@@ -32,6 +34,8 @@ export class NuevaMascotaComponent implements OnInit {
           .catch(error => this.errorMessage = <any>error);
       }
     });
+    this.especieService.get().then(esp => {this.especies = esp;
+      console.log(this.especies)});
   }
 
   submitForm() {
@@ -40,6 +44,7 @@ export class NuevaMascotaComponent implements OnInit {
     this.mascotasService.guardarMascota(this.mascota)
       .then(mascota => this.router.navigate(['/mascotas']))
       .catch(error => this.procesarValidacionesRest(error));
+    
   }
   
   
@@ -63,5 +68,9 @@ export class NuevaMascotaComponent implements OnInit {
     } else {
       this.errorMessage = data.message;
     }
+  }
+  getEspecies(){
+    this.especieService.get().then(esp => {this.especies = esp;
+    console.log(this.especies)});
   }
 }
