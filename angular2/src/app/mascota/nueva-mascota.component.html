@@ -52,7 +52,6 @@
 		<input type="text" class="form-control" name="descripcion" [class.errorBorder]="errors['descripcion']"
 			[(ngModel)]="mascota.raza" required>
 	</div>
-
 	<div class='botones'>
 		<button class="btn btn-default" [routerLink]="['/mascotas']" >Cancelar</button>
 		<button class="btn btn-warning" *ngIf="mascota.id" (click)="onDelete()">Eliminar</button>
